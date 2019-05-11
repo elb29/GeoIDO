@@ -9,6 +9,12 @@ var csvInJson = {} ;
 valid.addEventListener("click", function(){cleanOrNot(0)});
 
 function cleanOrNot(numClean){
+
+
+
+
+
+
 	if(document.getElementById("clean").checked) {
 		if (numClean == 0) {
 			$.ajax({
@@ -122,7 +128,6 @@ function cleanOrNot(numClean){
 	}
 }
 
-
 function csvParse() {
 
 	var config = buildConfig();
@@ -150,7 +155,6 @@ function csvParse() {
 
 function toFROST(csv,i){
 
-		console.log(csv[1]);
 		var obj = csv[i];
 		console.log(obj);
 
@@ -198,10 +202,8 @@ function toFROST(csv,i){
 	      "description": "",
 	      "encodingType": "",
 	      "metadata": ""
-	    }
-			}
-
-	  ]
+	    	}
+			}]
 	  });
 
 		$.ajax({
@@ -210,8 +212,28 @@ function toFROST(csv,i){
 	    data: json,
 	    contentType: "application/json; charset=utf-8",
 	    success: function(data){
-	        console.log("reussite");
-					locationToFROST(csv,i,6);
+	        console.log("envoi du thing");
+
+					$.ajax({
+						url: "http://localhost:8080/FROST-Server/v1.0/Datastreams",
+						type: "GET",
+						contentType: "application/json; charset=utf-8",
+						success: function(data){
+								console.log(data);
+								id_datastream = 0;
+								for (n of data.value) {
+									if (n["@iot.id"]>id_datastream) {
+									id_datastream = n["@iot.id"];
+									}
+								}
+								locationToFROST(csv,i,6,id_datastream);
+						},
+						error: function(response, status){
+								console.log(response);
+								console.log(status);
+						}
+					});
+
 	    },
 	    error: function(response, status){
 	        console.log(response);
@@ -221,13 +243,11 @@ function toFROST(csv,i){
 
 }
 
-function locationToFROST(listObj,i,j){
+function locationToFROST(listObj,i,j,id_datastream){
 
 	var obj = listObj[i]
-	var id_datastream = 0;
 
-	$.get("http://localhost:8080/FROST-Server/v1.0/Datastreams", function(response, status) {
-	  id_datastream = response.value[response.value.length-1]["@iot.id"] ;
+	//$.get("http://localhost:8080/FROST-Server/v1.0/Datastreams", function(response, status) {
 
 		console.log("id_datastream = " + id_datastream);
 
@@ -241,7 +261,7 @@ function locationToFROST(listObj,i,j){
 				console.log("coucouc " + l );
 				l = l+1;
 				var json = JSON.stringify({
-				  "resultTime": "2017-02-07T18:02:00.000Z",
+				  "resultTime": prop,
 				  "result": obj[prop],
 					"Datastream": {
 				    "@iot.id": id_datastream
@@ -268,7 +288,7 @@ function locationToFROST(listObj,i,j){
 							j = j+1;
 							console.log("i = " + i);
 							console.log("j = " + j);
-							locationToFROST(listObj,i,j);
+							locationToFROST(listObj,i,j,id_datastream);
 						}
 
 				  },
@@ -279,7 +299,7 @@ function locationToFROST(listObj,i,j){
 				});
 			}
 		}
-	});
+	//});
 }
 
 function buildConfig()

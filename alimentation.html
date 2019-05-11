@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<link rel='stylesheet' href="alimentation.css" />
+	</head>
+
+<body>
+	<form action="#" method="post" id="form">
+		<select id="format">
+			<option value="0">Choisir le format de vos données.</option>
+		  <option value="Nom_thing1">Nom thing, Observed, Nom observed prop, Unité de mesure, date1/mesure1, ..., dateN/mesureN</option>
+		</select>
+		<input type="file" id="files" multiple="">
+
+		<label>Clean le server avant d'ajouter les nouvelles données : <input type="checkbox" id="clean"></label>
+		<p><input type="button" id="val_thing" value="Valider envoi du Thing"></p>
+
+	</form>
+</body>
+
+<script src="jquery-3.4.0.min.js"></script>
+<script src="papaparse.min.js"></script>
+<script src = "alimentationFROST.js"> </script>
+
+</html>
