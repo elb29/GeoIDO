@@ -11,7 +11,7 @@ var date = document.getElementById('date');
 // Afficher les données sur la carte
 var lay = L.featureGroup().addTo(map);
 
-
+var listLoc = [];
 var obsli2 = [];
 var xAbs2 =[];
 var data = [];
