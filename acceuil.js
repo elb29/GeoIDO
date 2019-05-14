@@ -4,8 +4,9 @@ function imageGalerie()
     console.log(active);
 
     console.log(active.next());
+    console.log(active[0].id=='t');
 	
-    var next = (active.next().length > 0) ? active.next() : $('#galerie img:first');
+    var next = (active.next().length > 0 && active.next()[0].id=="t" ) ? active.next() : $('#galerie img:first');
 
     
    
@@ -19,4 +20,4 @@ function imageGalerie()
 	   });	
 }
 
-setInterval('imageGalerie()',2500);
+setInterval('imageGalerie()',5000);

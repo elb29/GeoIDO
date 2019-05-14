@@ -65,8 +65,10 @@ border-left: none;
 
 #galerie h1{
 	
-	position: absolute;
+	position: relative;
 	color: white;
 	text-align: center;
+	font-size: 300%;
+	text-shadow:  2px 0 0 black;
 }
 
