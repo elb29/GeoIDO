@@ -79,6 +79,7 @@ Installer TomCat : https://tomcat.apache.org/download-80.cgi
 - Ajouter FROST a TomCat : Copier le fichier FROST-Server-x.x.war (https://github.com/FraunhoferIOSB/FROST-Server) dans le dossier webapps de TomCat. (conseil : renommer le fichier Frost-Server.war pour faciliter les mises à jours)
 - Dans le dossier conf/Catalina/localhost modifier le fichier FROST-Server.xml : en y rajoutant avant la fermeture de la balise </Context> :
 
+
     <Resource
         name="jdbc/sensorThings" auth="Container"
         type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
@@ -87,6 +88,7 @@ Installer TomCat : https://tomcat.apache.org/download-80.cgi
         maxTotal="20" maxIdle="10" maxWaitMillis="-1"
         defaultAutoCommit="false"
     />
+
 
 Modifications à faire :
 
