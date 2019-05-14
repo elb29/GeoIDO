@@ -1,0 +1,23 @@
+#mapid{
+    height: 700px;
+    width: auto;
+}
+#graph{
+  height: 500px;
+  width: auto;;
+}
+body{
+  margin-right: 150px;
+  margin-left: 150px;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+h1{
+  text-align: center;
+
+
+}
+#date{
+    font-size : 20px;
+}
