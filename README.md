@@ -78,14 +78,15 @@ Installer TomCat : https://tomcat.apache.org/download-80.cgi
 - Ajouter PostGreSQL a TomCat : ajouter au dossier $Catalina_Home/lib les fichiers Postgres JDBC jar et postgis jar
 - Ajouter FROST a TomCat : Copier le fichier FROST-Server-x.x.war (https://github.com/FraunhoferIOSB/FROST-Server) dans le dossier webapps de TomCat. (conseil : renommer le fichier Frost-Server.war pour faciliter les mises à jours)
 - Dans le dossier conf/Catalina/localhost modifier le fichier FROST-Server.xml : en y rajoutant avant la fermeture de la balise </Context> :
-<Resource
-name="jdbc/sensorThings" auth="Container"
-type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
-url="jdbc:postgresql://localhost:5434/SensorThings"
-username="postgres" password="postgres"
-maxTotal="20" maxIdle="10" maxWaitMillis="-1"
-defaultAutoCommit="false"
-/>
+
+    <Resource
+        name="jdbc/sensorThings" auth="Container"
+        type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
+        url="jdbc:postgresql://database:5432/SensorThings"
+        username="postgres" password="postgres"
+        maxTotal="20" maxIdle="10" maxWaitMillis="-1"
+        defaultAutoCommit="false"
+    />
 
 Modifications à faire :
 
@@ -93,6 +94,7 @@ Modifications à faire :
 - Changer l’utilisateur/mot de passe tels que définis dans la BDD
 Initialisation de la BDD :
 - A http://localhost:8080/FROST-Server/DatabaseStatus : Cliquer sur Update si l’initialisation se passe bien : un Done. Apparait sur la page.
+
 Frost est maintenant installé sur votre ordinateur : http://localhost:8080/FROST-Server/v1.0
 
 # Mise en place du site : 
