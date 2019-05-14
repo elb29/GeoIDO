@@ -87,6 +87,7 @@ Frost est maintenant installé sur votre ordinateur : http://localhost:8080/FROS
 Après avoir installé FROST :
 
 — Placer le dossier « GeoIDO » dans le dossier apache-tomCat9/webapps
+
 — Ouvrir votre navigateur web et entrer l’url : localhost :8080/GeoIDO
 
 Il faut maintenant alimenter le serveur, pour cela allez dans l'onglet "Alimentation" de votre site et télécharger les données CSV fournis avec le code. Vous pouvez maintenant visualiser les données dans l'onglet "Carte". 
