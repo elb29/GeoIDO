@@ -77,7 +77,7 @@ Installer TomCat : https://tomcat.apache.org/download-80.cgi
 
 - Ajouter PostGreSQL a TomCat : ajouter au dossier $Catalina_Home/lib les fichiers Postgres JDBC jar et postgis jar
 - Ajouter FROST a TomCat : Copier le fichier FROST-Server-x.x.war (https://github.com/FraunhoferIOSB/FROST-Server) dans le dossier webapps de TomCat. (conseil : renommer le fichier Frost-Server.war pour faciliter les mises à jours)
-- Dans le dossier conf/Catalina/localhost modifier le fichier FROST-Server.xml : en y rajoutant avant la fermeture de la balise </Context>    la balise <Ressource .... > du tuto Ubuntu ci-dessus.
+- Dans le dossier conf/Catalina/localhost modifier le fichier FROST-Server.xml : en y rajoutant avant la fermeture de la balise < / Context>    la balise <Ressource .... > du tuto Ubuntu ci-dessus.
 
 
 Modifications à faire :
