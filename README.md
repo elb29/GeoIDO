@@ -22,23 +22,33 @@ Une fois installer ouvrir PgAdmin3, créer un serveur SensorThings puis une BDD 
 Installation de TomCat :
 
 Télécharger le fichier tar.gz ici :  https://tomcat.apache.org/download-90.cgi
-sudo apt-get update
-sudo apt-get install default-jdk
-créer un dossier apache-tomcat9
-ouvrir le fichier tar.gz puis le copier dans /usr/local/apache-tomcat9
-echo "export CATALINA_HOME="/usr/local/apache-tomcat9"" >> ~/.bashrc
-echo "export JAVA_HOME="/usr/lib/jvm/java-8-oracle"" >> ~/.bashrc
-echo "export JRE_HOME="/usr/lib/jvm/java-8-oracle/jre"" >> ~/.bashrc
-source ~/.bashrc
-Démarrer le serveur Tomcat :
-ouvrir un terminal dans apache-tomcat9/bin
-sudo bash startup.sh 
 
+$ sudo apt-get update
+$ sudo apt-get install default-jdk
+
+créer un dossier apache-tomcat9
+
+ouvrir le fichier tar.gz puis le copier dans /usr/local/apache-tomcat9
+
+$ echo "export CATALINA_HOME="/usr/local/apache-tomcat9"" >> ~/.bashrc
+$ echo "export JAVA_HOME="/usr/lib/jvm/java-8-oracle"" >> ~/.bashrc
+$ echo "export JRE_HOME="/usr/lib/jvm/java-8-oracle/jre"" >> ~/.bashrc
+$ source ~/.bashrc
+
+Démarrer le serveur Tomcat :
+
+ouvrir un terminal dans apache-tomcat9/bin
+
+$ sudo bash startup.sh 
+
+Cette ligne permet de demarrer le serveur TomCat à chaque fois que vous souhaitez utiliser le site.
 
 Installation du serveur
 
 Dans le dossier apache-tomcat9/webapps/ coller le fichier FROST-Server.MQTT*.war
+
 Dans le dossier correspondant aller dans META-INF modifier le fichier context.xml avec :
+
     <Resource
         name="jdbc/sensorThings" auth="Container"
         type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
@@ -47,8 +57,11 @@ Dans le dossier correspondant aller dans META-INF modifier le fichier context.xm
         maxTotal="20" maxIdle="10" maxWaitMillis="-1"
         defaultAutoCommit="false"
     />
-Remplir avec vos informations, puis le copier pour le coller dans apache-tomcat/conf en le renommant FROST-Server et supprimant ‘’driverClassName="org.postgresql.Driver" ‘’
+    
+Remplir avec vos informations, puis le copier pour le coller dans apache-tomcat/conf en le renommant FROST-Server et supprimant "driverClassName="org.postgresql.Driver" "
+
 Aller sur http://localhost:8080/FROST-Server/DatabaseStatus
+
 Cliquer sur update et votre BDD est reliée à votre server (des tables ce sont créées dans votre BDD et Done est affiché).
 
 # Installer FROST sous Windows : 
