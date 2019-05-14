@@ -1,20 +1,33 @@
-
+// Bouton d'envoie des données.
 var valid = document.getElementById("val_thing");
-var monfichier = document.getElementById("files")
+
+// Fichier.
+var monfichier = document.getElementById("files");
+
+// variable PapaParse
 var inputType = "local";
+//variable PapaParse
 var stepped = 0;
 
+// variable de stockage du résulat de PapaParse
 var csvInJson = {} ;
 
 valid.addEventListener("click", function(){cleanOrNot(0)});
 
+
+/** fonction cleanOrNot :
+@param numClean Le ieme fois que la fonction est lancée.
+
+	Fonction qui lance le clean du server si la cas est cochée.
+
+	Afin de palier à l'absence de la possiblité d'utiliser ajax en asynchrone on
+appelle une nouvelle la fonction avec l'indice i+1 dans le paramètre success de
+notre requete ajax.
+
+	Une fois que l'on a clean l'ensemble des tables on passe à la fonction csvParse().
+
+*/
 function cleanOrNot(numClean){
-
-
-
-
-
-
 	if(document.getElementById("clean").checked) {
 		if (numClean == 0) {
 			$.ajax({
@@ -128,6 +141,12 @@ function cleanOrNot(numClean){
 	}
 }
 
+
+/** fonction csvParse :
+
+Foction de la librairie PapaParse qui permet de transformer un csv en JSON.
+
+*/
 function csvParse() {
 
 	var config = buildConfig();
@@ -153,6 +172,23 @@ function csvParse() {
 			});
 }
 
+
+/** fonction toFROST :
+@param csv Le csv transformé en json.
+@param i Le i em objet du csv et i eme lancement de la fonction
+
+	Fonction qui envoie le thing au server.
+
+	Afin de palier à l'absence de la possiblité d'utiliser ajax en asynchrone on
+appelle une nouvelle la fonction avec l'indice i+1 dans le paramètre success de
+notre requete ajax.
+
+	On rempli un string sous la forme JSON avec nos différents parametres. Puis on
+	envoie cet objet au server.
+
+	Une fois que l'on a rempli le server on passe à la fonction locationToFROST().
+
+*/
 function toFROST(csv,i){
 
 		var obj = csv[i];
@@ -206,6 +242,7 @@ function toFROST(csv,i){
 			}]
 	  });
 
+
 		$.ajax({
 	    url: "http://localhost:8080/FROST-Server/v1.0/Things",
 	    type: "POST",
@@ -226,7 +263,7 @@ function toFROST(csv,i){
 									id_datastream = n["@iot.id"];
 									}
 								}
-								locationToFROST(csv,i,6,id_datastream);
+								obsToFROST(csv,i,6,id_datastream);
 						},
 						error: function(response, status){
 								console.log(response);
@@ -243,7 +280,26 @@ function toFROST(csv,i){
 
 }
 
-function locationToFROST(listObj,i,j,id_datastream){
+
+/** fonction obsToFROST :
+@param listObj Le csv transformé en json.
+@param i Le i em objet du csv
+@param j La j em observation du ieme objet
+@param id_datastream L'id su datastream lié a l'observation
+
+	Fonction qui envoie les observations au server.
+
+	Afin de palier à l'absence de la possiblité d'utiliser ajax en asynchrone on
+appelle une nouvelle la fonction avec l'indice i+1 dans le paramètre success de
+notre requete ajax.
+
+	La fonction envoie l'observation au server, relié a son datastream. Une fois fait
+	on passe à l'observation suivante pour cet objet (i,j+1).
+
+	Une fois que l'on a rempli le server on passe à la fonction toFROST pour l'objet suivant (i+1,j0=6).
+
+*/
+function obsToFROST(listObj,i,j,id_datastream){
 
 	var obj = listObj[i]
 
@@ -302,6 +358,12 @@ function locationToFROST(listObj,i,j,id_datastream){
 	//});
 }
 
+
+
+
+/**
+Fonction de la bibliotheque PapaParse
+*/
 function buildConfig()
 {
 	return {
@@ -320,6 +382,9 @@ function buildConfig()
 	};
 }
 
+/**
+Fonction de la bibliotheque PapaParse
+*/
 function now()
 {
 	return typeof window.performance !== 'undefined'
@@ -327,6 +392,9 @@ function now()
 			: 0;
 }
 
+/**
+Fonction de la bibliotheque PapaParse
+*/
 function completeFn(results)
 {
 	end = now();
@@ -350,6 +418,9 @@ function completeFn(results)
 	setTimeout(enableButton, 100);
 }
 
+/**
+Fonction de la bibliotheque PapaParse
+*/
 function errorFn(err, file)
 {
 	end = now();
@@ -357,11 +428,17 @@ function errorFn(err, file)
 	enableButton();
 }
 
+/**
+Fonction de la bibliotheque PapaParse
+*/
 function enableButton()
 {
 	$('#submit').prop('disabled', false);
 }
 
+/**
+Fonction de la bibliotheque PapaParse
+*/
 function printStats(msg)
 {
 	if (msg)
