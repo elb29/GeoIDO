@@ -186,7 +186,7 @@ notre requete ajax.
 	On rempli un string sous la forme JSON avec nos différents parametres. Puis on
 	envoie cet objet au server.
 
-	Une fois que l'on a rempli le server on passe à la fonction locationToFROST().
+	Une fois que l'on a rempli le server on passe à la fonction obsToFROST().
 
 */
 function toFROST(csv,i){
@@ -344,7 +344,7 @@ function obsToFROST(listObj,i,j,id_datastream){
 							j = j+1;
 							console.log("i = " + i);
 							console.log("j = " + j);
-							locationToFROST(listObj,i,j,id_datastream);
+							obsToFROST(listObj,i,j,id_datastream);
 						}
 
 				  },

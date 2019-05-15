@@ -81,7 +81,7 @@ function datastream(i,datast) {
     };
 
     m = i+1
-    date.innerHTML = "<br> date de début : " + obs.value[0].resultTime.substr(0,10) + "   date de fin : " + obs.value[obs.value.length-1].resultTime.substr(0,10) +"<br>" ;
+    date.innerHTML = "<br> date de début : " + obs.value[obs.value.length-1].resultTime.substr(0,10) + "   date de fin : " + obs.value[0].resultTime.substr(0,10) +"<br>" ;
     xAbs2.push(xAbs);
     obsli2.push(obsli);
 
